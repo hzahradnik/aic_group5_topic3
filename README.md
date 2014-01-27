@@ -70,6 +70,7 @@ Now you can run the command `mvn run`
 At last you have to create the image, which will be used to start up new instances. Please follow the instruction without the last step on https://code.google.com/p/cloudscale/wiki/BuildingServerImages
 
 Before you create the image connect to the machine and create a file `/opt/cloudscale/CloudScaleMessageQueueConnection.cfg`
+
     ec2-54-206-35-230.ap-southeast-2.compute.amazonaws.com:61616
 
 Afterwards you can create the image and give it the name _CloudScale_v0.2.0_.
