@@ -1,0 +1,28 @@
+@(user: User)
+
+@main() {
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+
+    <header class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="@routes.Application.index">Sentiment Analysis <small>- Company @user.name</small></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="@routes.Application.logout">Abmelden</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container" id="content">
+        <button type="button" data-loading-text="Analyzing..." class="btn btn-primary btn-lg" id="btn-analyze">
+            Start analyzing
+        </button>
+
+        <p id="result" style="display: none">
+            0.3
+        </p>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="@routes.Application.analyzeJs"></script>
+}

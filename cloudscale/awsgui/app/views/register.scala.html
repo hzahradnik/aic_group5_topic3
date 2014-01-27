@@ -1,0 +1,39 @@
+@(form: Form[Register])
+
+@main() {
+<header class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="@routes.Application.index">Sentiment Analysis</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="@routes.Application.index">Back</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+    @helper.form(routes.Application.registerUser) {
+        <h1>New Company</h1>
+
+        @if(form.hasGlobalErrors) {
+            <p class="error">
+                @form.globalError.message
+            </p>
+        }
+
+        <p>
+            <input class="form-control" type="text" name="name" placeholder="Company" value="@form("name").value">
+        </p>
+        <p>
+            <input class="form-control" type="password" name="password1" placeholder="Password">
+        </p>
+        <p>
+            <input class="form-control" type="password" name="password2" placeholder="Re-enter Password">
+        </p>
+        <p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        </p>
+    }
+</div>
+}

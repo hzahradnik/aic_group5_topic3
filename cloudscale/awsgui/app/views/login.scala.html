@@ -1,0 +1,36 @@
+@(form: Form[Login])
+
+@main() {
+    <header class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="@routes.Application.index">Sentiment Analysis</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="@routes.Application.register">Register</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        @helper.form(routes.Application.authenticate) {
+            <h1>Login</h1>
+
+            @if(form.hasGlobalErrors) {
+                <p class="error">
+                    @form.globalError.message
+                </p>
+            }
+
+            <p>
+                <input class="form-control" type="text" name="name" placeholder="Username" value="@form("name").value">
+            </p>
+            <p>
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </p>
+            <p>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </p>
+        }
+    </div>
+}

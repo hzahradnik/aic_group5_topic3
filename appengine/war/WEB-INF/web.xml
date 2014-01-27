@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Dispatcher</servlet-name>
+		<servlet-class>aic.group5.topic3.Dispatcher</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>aic.group5.topic3.Login</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>aic.group5.topic3.Register</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Analyze</servlet-name>
+		<servlet-class>aic.group5.topic3.Analyze</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>aic.group5.topic3.Logout</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AnalyzeTask</servlet-name>
+		<servlet-class>aic.group5.topic3.AnalyzeTask</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Analyze</servlet-name>
+		<url-pattern>/analyze</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AnalyzeTask</servlet-name>
+		<url-pattern>/analyze_task</url-pattern>
+	</servlet-mapping>
+</web-app>

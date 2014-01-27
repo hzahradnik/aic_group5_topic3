@@ -1,0 +1,14 @@
+verbose=true
+
+auth.credentials=passwordCredentials
+auth.username=rst
+auth.password=17111987
+auth.tenantName=CloudScale
+
+
+identity.endpoint.publicURL=http://128.131.172.136:5000/v2.0
+identity.endpoint.internalURL=http://128.131.172.136:5000/v2.0
+identity.endpoint.adminURL=http://128.131.172.136:35357/v2.0
+
+test.glance=false
+test.swift=false

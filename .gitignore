@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+
+cloudscale/analysis/target
+cloudscale/analysis/repository
+
+**/*aws.config
+
+# Idea metadata #
+.idea
+*.iml
