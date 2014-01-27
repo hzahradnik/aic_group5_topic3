@@ -9,6 +9,7 @@ cloudscale/analysis/target
 cloudscale/analysis/repository
 
 **/*aws.config
+**/*analysis.properties
 
 # Idea metadata #
 .idea

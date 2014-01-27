@@ -15,8 +15,11 @@
 */
 package at.ac.tuwien.infosys.cloudscale.sample.sentiment;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 
 import at.ac.tuwien.infosys.cloudscale.annotations.CloudScaleConfigurationProvider;
@@ -31,15 +34,23 @@ public class ConfigurationProvider {
 	public static CloudScaleConfiguration getConfiguration()
 			throws FileNotFoundException, IOException
 	{
+		Properties properties = new Properties();
+		BufferedInputStream stream = new BufferedInputStream(new FileInputStream("analysis.properties"));
+		properties.load(stream);
+		stream.close();
+		
+		if(properties.isEmpty()) {
+			throw new IllegalArgumentException("Einstellungsdatei ist leer");
+		}
 		
 		EC2CloudPlatformConfiguration platformConfig = new EC2CloudPlatformConfiguration();
 		platformConfig.setAwsConfigFile("aws.config");
-		platformConfig.setAwsEndpoint("ec2.ap-southeast-2.amazonaws.com");
-		platformConfig.setInstanceType("t1.micro");
-		platformConfig.setSshKey("aic13-team3-group5");
+		platformConfig.setAwsEndpoint(properties.getProperty("awsEndpoint"));
+		platformConfig.setInstanceType(properties.getProperty("instanceType"));
+		platformConfig.setSshKey(properties.getProperty("sshKey"));
 		//platformConfig.setMqImageName("ami-f12eb2cb");
 		MessageQueueConfiguration mqConfig = new MessageQueueConfiguration();
-		mqConfig.setServerAddress("ec2-54-206-41-183.ap-southeast-2.compute.amazonaws.com");
+		mqConfig.setServerAddress(properties.getProperty("mqServer"));
 		platformConfig.setMessageQueueConfiguration(mqConfig);
 		
 		
@@ -48,7 +59,7 @@ public class ConfigurationProvider {
 		CloudScaleConfiguration cfg = CloudScaleConfigurationBuilder
 				// enable local configuration for testing ...
 				.createLocalConfigurationBuilder()
-				.withMQServerHostname("ec2-54-206-41-183.ap-southeast-2.compute.amazonaws.com")
+				.withMQServerHostname(properties.getProperty("mqServer"))
 				.with(platformConfig)
 				// or Openstack configuration to actually deploy to the cloud
 //				.createOpenStackConfigurationBuilder("openstack.props",
