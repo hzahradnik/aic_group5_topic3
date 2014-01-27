@@ -55,7 +55,14 @@ Connect to the instance and copy the folder _analysis_ (inside the folder _cloud
 
     accessKey = YOURACCESSKEY
     secretKey = yoursecretkey
-    mq.address = ec2-54-206-35-230.ap-southeast-2.compute.amazonaws.com
+    mq.address = ec2-54-206-35-230.ap-southeast-2.compute.amazonaws.com (Replace with IP of your ActiveMQ)
+
+Furthermore you have to edit the file _analysis.properties_ located in `src/main/resources` (if not create it).
+    
+    awsEndpoint=AWSENDPOINT
+    instanceType=INSTANCETYPE (e.g. t1.micro)
+    sshKey=SSHKEY_NAME
+    mqServer=ec2-54-206-41-183.ap-southeast-2.compute.amazonaws.com (Replace with IP of your ActiveMQ)
 
 Now you can run the command `mvn run`
 
