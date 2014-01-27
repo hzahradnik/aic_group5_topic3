@@ -63,7 +63,7 @@ Furthermore you have to edit the file _analysis.properties_ located in `src/main
     sshKey=SSHKEY_NAME
     mqServer=ec2-54-206-41-183.ap-southeast-2.compute.amazonaws.com (replace with IP or DNS of your ActiveMQ)
 
-Now you can run the command `mvn run`
+Now you can run the command `mvn clean compile exec:exec`
 
 #### Web GUI
 Create a new instance and install the play framework from www.playframework.com/download
@@ -72,7 +72,7 @@ When you're done, copy the folder _awsgui_ (inside the folder _cloudscale_) to t
 
     app.url="http://ec2-54-206-49-26.ap-southeast-2.compute.amazonaws.com:8080/api/sentiment" (replace with IP or DNS of your Sentiment Analysis, but don't change the port and path of the resource)
 
-Now you can start the application with `play start`
+Now you can start the application with `sudo /relative/path/to/play "start -DapplyEvolutions.default=true -Dhttp.port=80"`
 
 #### Cloudscale Image
 At last you have to create the image, which will be used to start up new instances. Please follow the instruction without the last step on https://code.google.com/p/cloudscale/wiki/BuildingServerImages
