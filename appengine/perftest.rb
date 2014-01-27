@@ -14,7 +14,7 @@ $url_analyze = URI.parse( "http://#{domain}/analyze" )
 $url_register = URI.parse( "http://#{domain}/register" )
 
 semaphore = Mutex.new
-keywords = IO.read( "../SentimentAnalysis2.0/src/main/resources/task_2.txt" ).lines.to_a.map { |x| x.to_s.strip }
+keywords = IO.read( "../cloudscale/analysis/src/main/resources/task_2.txt" ).lines.to_a.map { |x| x.to_s.strip }
 
 def fetch_tag( semaphore, keyword )
   semaphore.synchronize { puts "request #{keyword}" }
