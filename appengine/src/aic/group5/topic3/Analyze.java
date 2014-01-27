@@ -50,6 +50,9 @@ public class Analyze extends HttpServlet {
 		if( "analyzing".equals( result ) ) {
 			resp.getWriter().print( gson.toJson( AnalyzeResult.stillAnalyzing( ) ) );
 
+		} else if( "error".equals( result ) && !"true".equals( req.getParameter( "start" ) ) ) {
+			resp.getWriter().print( gson.toJson( AnalyzeResult.error( ) ) );
+
 		} else if( result instanceof Double && isUpToDateResult( user ) ) {
 			resp.getWriter( ).print( gson.toJson( AnalyzeResult.done( (Double) result ) ) );
 

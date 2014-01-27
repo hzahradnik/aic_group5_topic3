@@ -8,11 +8,16 @@ public class SentimentAnalysis {
 
 		System.out.println("Created classifier for " + keyword);
 
-		// do the analysis
-		SentimentResult result = TwitterSentimentAnalyzer.analyzeTweets(
-				keyword, new TwitterQueryWrapper(), classifier );
+		try {
+			// do the analysis
+			SentimentResult result = TwitterSentimentAnalyzer.analyzeTweets(
+					keyword, new TwitterQueryWrapper(), classifier );
 
-		System.out.println("Received result for " + keyword);
-		return result;
+			System.out.println("Received result for " + keyword);
+			return result;
+		} catch( Exception e ) {
+			e.printStackTrace( );
+			return null;
+		}
 	}
 }

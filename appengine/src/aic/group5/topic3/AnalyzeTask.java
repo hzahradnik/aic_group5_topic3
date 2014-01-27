@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 public class AnalyzeTask extends HttpServlet {
+	private final Logger log = Logger.getLogger( "analyze" );
+
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
@@ -29,20 +31,38 @@ public class AnalyzeTask extends HttpServlet {
 	public void both( HttpServletRequest req, HttpServletResponse resp ) throws IOException, ServletException {
 		String name = req.getParameter( "name" );
 
-		Logger.getLogger( "bla" ).info( "in AnalyzeTask = " + name );
+		log.info( "start analyze for " + name );
 
 		SentimentResult sentimentResult = SentimentAnalysis.analyze( name );
 
 		Entity user = UserRepo.getEntity( name );
-		double result = sentimentResult.getCalculatedResult( );
+		AnalyzeResult result = null;
 
-		if( user != null ) {
-			user.setProperty( "result", result );
-			UserRepo.saveEntity( user );
+		if( sentimentResult != null && sentimentResult.isSuccess( ) ) {
+			double r = sentimentResult.getCalculatedResult( );
+			log.info( "sentiment result = " + r );
+
+			if( user != null ) {
+				user.setProperty( "result", r );
+				UserRepo.saveEntity( user );
+			} else {
+				Logger.getLogger( "analyze" ).info( "user " + name + " not found" );
+			}
+
+			result = AnalyzeResult.done( r );
 		} else {
-			Logger.getLogger( "analyze" ).info( "user " + name + " not found" );
+			log.info( "got no sentiment result" );
+			result = AnalyzeResult.error( );
+
+			if( user != null ) {
+				user.setProperty( "result", "error" );
+				UserRepo.saveEntity( user );
+			} else {
+				Logger.getLogger( "analyze" ).info( "user " + name + " not found" );
+			}
 		}
 
-		resp.getWriter( ).print( new Gson().toJson( AnalyzeResult.done( result ) ) );
+		log.info( "end analyze for " + name );
+		resp.getWriter( ).print( new Gson( ).toJson( result ) );
 	}
 }
