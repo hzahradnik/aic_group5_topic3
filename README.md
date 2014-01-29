@@ -4,10 +4,8 @@ aic_group5_topic3
 Advanced Internet Computing - Gruppe 5 - Topic 3
 ------------------------------------------------
 
-This README is under construction.
-
 ### Amazon Web Services
-If you want to deploy our solution in AWS, you have to create at minimum one instance for the ActiveMQ server to run, the Web GUI and the Sentiment Analysis.
+If you want to deploy our solution in AWS, you have to create at minimum one instance for the ActiveMQ server to run, the Web GUI and the Sentiment Analysis. We used Ubuntu 13.04 64-bit as OS for all virtual machines.
 
 You can also can install each of them on a single instance, but then you have to make sure, that the instances are able to communicate to each other on the needed ports.
 
@@ -84,7 +82,7 @@ Before you create the image connect to the machine and create a file `/opt/cloud
 Afterwards you can create the image and give it the name _CloudScale_v0.2.0_.
 
 ### AppEngine
-The installation of the AppEngine-Project is very straightforward. First install Google AppEngine-Plugin for Eclipse (Version 4.3, Kepler), therefore choose _Help => Install new software..._ and add following software site:
+The installation of the AppEngine-Project is very straightforward, we tested it on Linux (Arch Linux and Fedora 19) and on Mac OS X. First install Google AppEngine-Plugin for Eclipse (Version 4.3, Kepler), therefore choose _Help => Install new software..._ and add following software site:
 
 ```
 http://dl.google.com/eclipse/plugin/4.3
