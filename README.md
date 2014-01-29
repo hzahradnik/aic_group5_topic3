@@ -11,7 +11,7 @@ If you want to deploy our solution in AWS, you have to create at minimum one ins
 
 You can also can install each of them on a single instance, but then you have to make sure, that the instances are able to communicate to each other on the needed ports.
 
-We tested the solution with two instances: One for the stand-alone ActiveMQ, the other bigger one (m1.small) for the Web GUI and the Sentiment Analysis. 
+We tested the solution with two instances: One for the stand-alone ActiveMQ, the other bigger one (m1.small) for the Web GUI and the Sentiment Analysis.
 
 Additionally you have to create a image for the single instances, so Cloudscale is able to create new instances.
 
@@ -38,7 +38,7 @@ Because cloudscale assigns the _default_ security group to allocated instances, 
 | ALL | ALL | _id security group_ |
 
 #### Elastic IPs
-When an instance was shutdown and it gets restarted, AWS doesn't always allocate the same IP for this instance. Because the IP of the ActiveMQ is hardwritten in the image for Cloudscale, you have to assign an Elastic IP to it. Same applies to the instance of the Sentiment Analysis, so assign an Elatic IP too. 
+When an instance was shutdown and it gets restarted, AWS doesn't always allocate the same IP for this instance. Because the IP of the ActiveMQ is hardwritten in the image for Cloudscale, you have to assign an Elastic IP to it. Same applies to the instance of the Sentiment Analysis, so assign an Elatic IP too.
 
 Athough you don't need it to run the project, we recommend to also get an Elastic IP for the Web GUI, if you plan to run it on a own instance.
 
@@ -57,7 +57,7 @@ Connect to the instance and copy the folder _analysis_ (inside the folder _cloud
     mq.address = ec2-54-206-35-230.ap-southeast-2.compute.amazonaws.com (replace with IP or DNS of your ActiveMQ)
 
 Furthermore you have to edit the file _analysis.properties_ located in `src/main/resources` (if not create it).
-    
+
     awsEndpoint=AWSENDPOINT
     instanceType=INSTANCETYPE (e.g. t1.micro)
     sshKey=SSHKEY_NAME
@@ -68,7 +68,7 @@ Now you can run the command `mvn clean compile exec:exec`
 #### Web GUI
 Create a new instance and install the play framework from www.playframework.com/download
 
-When you're done, copy the folder _awsgui_ (inside the folder _cloudscale_) to this instance and edit the file `conf/application.conf`.  
+When you're done, copy the folder _awsgui_ (inside the folder _cloudscale_) to this instance and edit the file `conf/application.conf`.
 
     app.url="http://ec2-54-206-49-26.ap-southeast-2.compute.amazonaws.com:8080/api/sentiment" (replace with IP or DNS of your Sentiment Analysis, but don't change the port and path of the resource)
 
@@ -84,6 +84,19 @@ Before you create the image connect to the machine and create a file `/opt/cloud
 Afterwards you can create the image and give it the name _CloudScale_v0.2.0_.
 
 ### AppEngine
-The installation of the AppEngine-Project is very straightforward. First install Google AppEngine-Plugin for Eclipse, then import project _appengine_ in the root directory of the repository. Subsequently choose _Debug as_ => _Web Application_ to debug the application locally. To deploy the project simply right-click `Project Explorer` and then choose _Google_ => _Deploy to App Engine_.
+The installation of the AppEngine-Project is very straightforward. First install Google AppEngine-Plugin for Eclipse (Version 4.3, Kepler), therefore choose _Help => Install new software..._ and add following software site:
+
+```
+http://dl.google.com/eclipse/plugin/4.3
+```
+
+You have to install the following software from this site:
+
+* Google App Engine Java SDK
+* Google Web Toolkit SDK
+* Google Plugin for Eclipse 4.3
+
+
+After installing the plugin and restarting eclipse, import project _appengine_ in the root directory of the repository. Subsequently choose _Debug as_ => _Web Application_ to debug the application locally. To deploy the project simply right-click `Project Explorer` and then choose _Google_ => _Deploy to App Engine_.
 
 Before the application can be deployed, it is necessary to set the application id in the project context menu under _Google_ => _AppEngine Settings..._.
