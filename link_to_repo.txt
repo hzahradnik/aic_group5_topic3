@@ -1,0 +1,3 @@
+The repository is hosted on github:
+
+https://github.com/hzahradnik/aic_group5_topic3
