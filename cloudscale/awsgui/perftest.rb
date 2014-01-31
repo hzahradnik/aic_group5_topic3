@@ -11,10 +11,9 @@ def fetch_tag( semaphore, keyword )
   req = Net::HTTP::Get.new(url.path+"?taskword=#{CGI::escape( keyword )}")
   res = Net::HTTP.start(url.host, url.port) {|http|
     http.read_timeout = 500
-    semaphore.synchronize { puts "before request #{keyword}" }
     http.request(req)
   }
-  semaphore.synchronize { puts "#{keyword} -> " + res.body }
+  semaphore.synchronize { puts "#{keyword} => " + res.body }
 end
 
 threads = []
@@ -27,11 +26,13 @@ else
   from = ARGV[ 0 ].to_i
   to = ARGV[ 1 ].to_i
   to = from if to == 0
-  
+
   keywords[ from..to ]
 end
 
-puts "kws= #{kws.inspect}"
+puts "kws.length = #{kws.length}"
+puts "kws=#{kws.inspect}"
+start = Time.now.to_f
 
 kws.each do |kw|
   t = Thread.new do
@@ -42,3 +43,5 @@ kws.each do |kw|
 end
 
 threads.each( &:join )
+duration = Time.now.to_f - start
+puts "duration = #{duration.inspect}"
