@@ -3,7 +3,7 @@ require 'cgi'
 require 'thread'
 
 semaphore = Mutex.new
-keywords = IO.read( "../SentimentAnalysis2.0/src/main/resources/task_2.txt" ).lines.to_a.map { |x| x.to_s.strip }
+keywords = IO.read( "../analysis/src/main/resources/task_2.txt" ).lines.to_a.map { |x| x.to_s.strip }
 
 def fetch_tag( semaphore, keyword )
   semaphore.synchronize { puts "request #{keyword}" }
@@ -17,7 +17,6 @@ def fetch_tag( semaphore, keyword )
 end
 
 threads = []
-puts "ARGV=#{ARGV.inspect}"
 
 kws = if ARGV.length == 1
   count = ARGV[ 0 ].to_i
